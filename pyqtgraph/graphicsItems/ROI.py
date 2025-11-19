@@ -1840,11 +1840,12 @@ class EllipseROI(ROI):
     ============== =============================================================
     
     """
-    def __init__(self, pos, size, **args):
+    def __init__(self, pos, size, /, resizable=True, **args):
         self.path = None
         ROI.__init__(self, pos, size, **args)
         self.sigRegionChanged.connect(self._clearPath)
-        self._addHandles()
+        if resizable:
+            self._addHandles()
         
     def _addHandles(self):
         self.addRotateHandle([1.0, 0.5], [0.5, 0.5])
